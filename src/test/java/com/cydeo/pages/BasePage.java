@@ -18,14 +18,24 @@ public class BasePage {
 
     }
 
-    @FindBy(xpath = "//*[@id=\"expanddiv\"]/ul/li[4]/a")
+    @FindBy(css = "[data-id='logout']")
     public WebElement logOutButton;
 
-    @FindBy(xpath = "//h2[contains(.,'Good afternoon')]")
+    @FindBy(xpath = "//div[@id='app-dashboard']/h2")
     public WebElement header;
 
     @FindBy(id="settings")
     public WebElement accountSetting;
+
+
+    @FindBy(className ="notifications")
+    public WebElement notification;
+
+    @FindBy(id ="unified-search")
+    public WebElement search;
+
+    @FindBy(id ="contactsmenu")
+    public WebElement searchContact;
 
     public void LogOut(){
 
@@ -39,6 +49,7 @@ public void navigateToModule(String module){
         Driver.getDriver().findElement(By.xpath(moduleLocator)).click();
 
 }
+
 
 
 }

@@ -9,15 +9,18 @@ import org.junit.Assert;
 public class DashboardStepDefs {
 
     BasePage basePage=new BasePage();
-    @When("click {string}")
-    public void click(String module) {
-       basePage.navigateToModule(module);
+
+
+
+    @When("user navigates to {string}")
+    public void userNavigatesTo(String module) {
+        basePage.navigateToModule(module);
+
     }
-    @Then("user can navigate to the {string} page")
-    public void userCanNavigateToThePage(String module) {
+
+    @Then("verify that user lands on {string} page")
+    public void verifyThatUserLandsOnPage(String module) {
 
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains(module));
     }
-
-
 }
