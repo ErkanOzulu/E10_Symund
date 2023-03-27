@@ -1,4 +1,4 @@
-@logout
+
 Feature:Log out functionality
 
   As a user I should be able to log out.

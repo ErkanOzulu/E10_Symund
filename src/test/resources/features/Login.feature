@@ -1,4 +1,4 @@
-@login
+
 Feature: Login Functionality
   As a user, I should be able to login.
 
