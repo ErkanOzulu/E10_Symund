@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class BasePage {
+public abstract class BasePage {
 
     /*
     In this class we will store WebElements common to all pages
@@ -24,10 +24,6 @@ public class BasePage {
     @FindBy(xpath = "//div[@id='app-dashboard']/h2")
     public WebElement header;
 
-    @FindBy(id="settings")
-    public WebElement accountSetting;
-
-
     @FindBy(className ="notifications")
     public WebElement notification;
 
@@ -37,11 +33,6 @@ public class BasePage {
     @FindBy(id ="contactsmenu")
     public WebElement searchContact;
 
-    public void LogOut(){
-
-        accountSetting.click();
-        logOutButton.click();
-}
 
 public void navigateToModule(String module){
 

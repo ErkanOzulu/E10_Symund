@@ -2,6 +2,7 @@ package com.cydeo.step_definitions;
 
 
 import com.cydeo.pages.BasePage;
+import com.cydeo.pages.DashboardPage;
 import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
@@ -12,7 +13,7 @@ import org.junit.Assert;
 
 public class LogoutStepDefs {
 
-    BasePage basePage = new BasePage();
+    DashboardPage dashboardPage=new DashboardPage();
     LoginPage loginPage=new LoginPage();
 
     @Given("user is logged in and on the dashboard page")
@@ -25,17 +26,17 @@ public class LogoutStepDefs {
 
     @When("click the account name dropdown in the top right corner")
     public void click_the_account_name_dropdown_in_the_top_right_corner() {
-        basePage.accountSetting.click();
+        dashboardPage.accountSetting.click();
     }
 
     @When("check the Log out button in the dropdown")
     public void check_the_Log_out_button_in_the_dropdown() {
-        basePage.logOutButton.isDisplayed();
+        dashboardPage.logOutButton.isDisplayed();
     }
 
     @When("click Log out button")
     public void click_Log_out_button() {
-        basePage.logOutButton.click();
+        dashboardPage.logOutButton.click();
     }
 
     @Then("Verify that user should be able to logout and ends up on the login page")
@@ -47,7 +48,7 @@ public class LogoutStepDefs {
 
     @Given("user is logged out")
     public void user_is_logged_out() {
-      basePage.LogOut();
+     dashboardPage.LogOut();
     }
 
     @When("Click the step back button in the top left corner")
