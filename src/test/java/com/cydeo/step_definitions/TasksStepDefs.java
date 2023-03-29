@@ -14,18 +14,15 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 
 public class TasksStepDefs {
-
-    LoginPage loginPage = new LoginPage();
     TasksPage tasksPage= new TasksPage();
 
-    @Given("user is logged in dashboard page and clicked to Tasks button and on the Tasks page")
-    public void user_is_logged_in_dashboard_page_and_clicked_to_tasks_button_and_on_the_tasks_page() {
+    @Given("user navigate to {string} page")
+    public void user_navigate_to_page(String module) {
 
-        Driver.getDriver().get(ConfigurationReader.getProperty("symund.url"));
-        loginPage.login();
-
-        tasksPage.tasksLinkBtn.click();
+        tasksPage.navigateToModule(module);
     }
+
+
     @When("click to addList button")
     public void click_to_add_list_button() {
 
