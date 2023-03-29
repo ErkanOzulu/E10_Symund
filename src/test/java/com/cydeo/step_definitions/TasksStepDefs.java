@@ -16,7 +16,6 @@ import org.openqa.selenium.Keys;
 public class TasksStepDefs {
 
     LoginPage loginPage = new LoginPage();
-    BasePage basePage = new BasePage();
     TasksPage tasksPage= new TasksPage();
 
     @Given("user is logged in dashboard page and clicked to Tasks button and on the Tasks page")
