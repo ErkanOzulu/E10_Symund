@@ -1,6 +1,7 @@
 package com.cydeo.step_definitions;
 
-import com.cydeo.pages.BasePage;
+
+import com.cydeo.pages.DashboardPage;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,13 +9,13 @@ import org.junit.Assert;
 
 public class DashboardStepDefs {
 
-    BasePage basePage=new BasePage();
+    DashboardPage dashboardPage=new DashboardPage();
 
 
 
     @When("user navigates to {string}")
     public void userNavigatesTo(String module) {
-        basePage.navigateToModule(module);
+        dashboardPage.navigateToModule(module);
 
     }
 

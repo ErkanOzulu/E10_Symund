@@ -1,6 +1,9 @@
 package com.cydeo.step_definitions;
 
+
+
 import com.cydeo.pages.BasePage;
+import com.cydeo.pages.DashboardPage;
 import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
@@ -15,7 +18,7 @@ import java.util.Map;
 public class LoginStepDefs {
 
     LoginPage loginPage = new LoginPage();
-    BasePage basePage = new BasePage();
+    DashboardPage dashboardPage=new DashboardPage();
 
     String password1;
 
@@ -44,7 +47,7 @@ public class LoginStepDefs {
     @Then("Verify that user can login")
     public void Verify_that_user_can_login() {
 
-        Assert.assertTrue(basePage.accountSetting.isDisplayed());
+        Assert.assertTrue(dashboardPage.accountSetting.isDisplayed());
     }
 
 
