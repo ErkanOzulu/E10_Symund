@@ -13,11 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TalkStepDefs {
+
     TalkPage talkPage =new TalkPage();
     @When("User click talk module")
     public void userClickTalkModule() {
-        BasePage basePage1=new BasePage();
-        basePage1.navigateToModule("spreed");
+
+      talkPage.navigateToModule("spreed");
     }
 
     @When("user click add button")
@@ -51,6 +52,7 @@ talkPage.creatConverssation.click();
 
     @And("User click create Conversation button")
     public void UserClickCreateConversationButton() {
+
         talkPage.creatConverssation.click();
     }
 

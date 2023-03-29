@@ -5,11 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class TalkPage {
+public class TalkPage extends BasePage {
 
-    public TalkPage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
+
 
 
     @FindBy(xpath = "//button[@slot='trigger']")
@@ -22,4 +20,5 @@ public class TalkPage {
     public WebElement searchParticipants;
 @FindBy(xpath = "//span[@class='acli__content__line-one__title']")
     public WebElement grupName;
+
 }
