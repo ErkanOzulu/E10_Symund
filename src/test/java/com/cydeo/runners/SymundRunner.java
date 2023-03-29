@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         glue = "com/cydeo/step_definitions",
         dryRun = false,
         stepNotifications = true,
-        tags = "@SYMU10-544",
+        tags = "@wip",
         publish=true
 )
 
