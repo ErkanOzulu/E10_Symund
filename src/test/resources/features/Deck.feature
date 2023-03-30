@@ -12,6 +12,7 @@ Feature: Deck Module
     And User see the opened sidebar
     And User see the add-board button and click it
     And User sees the popup box and enters the <"board name">
+    And User click the submit button
     Then User can see the created <"board name"> on the side bar
 
     Examples:

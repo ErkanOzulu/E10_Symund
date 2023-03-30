@@ -14,11 +14,17 @@ public class DeckPage extends BasePage{
     @FindBy(xpath = "//a[@class=\"app-navigation-toggle\"]")
     public WebElement threeLineButton;
 
-    @FindBy(xpath = "//a[@class=\"app-navigation-entry-link\"]")
+    @FindBy(xpath = "//*[@title=\"Add board\"]")
     public WebElement addBoardButton;
 
-     @FindBy(xpath = "//a[@placeholder=\"Board name\"]")
+     @FindBy(xpath = "//input[@type='text']")
     public WebElement inputBoardNameBox;
+
+    @FindBy(xpath = "//input[@class=\"icon-confirm\"]")
+    public WebElement inputBoardNameSubmitButton;
+
+    @FindBy(xpath = "//ul[@class=\"app-navigation-entry__children\"]//span")
+    public WebElement boardAddedVerifyButton;
 
 
 
