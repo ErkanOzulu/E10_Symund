@@ -15,6 +15,13 @@ Feature:Tasks Module Functionality
     And write a new list name "New Task List" to new list input box and click enter
     Then verify that user should see the new list link
 
+  @Sedat
+  Scenario: Create a new task
+  Given user added new task
+    When click to new task input box
+    And write a new task name "New Task" to new task input box and click enter
+    Then user should see the the new task name link
+
 
 
 

@@ -15,8 +15,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/cydeo/step_definitions",
         dryRun = false,
-        stepNotifications = true,
-        tags = "@wip",
+        tags = "@SYMU10-544",
         publish=true
 )
 

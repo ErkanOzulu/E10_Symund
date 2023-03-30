@@ -45,4 +45,20 @@ public class TasksStepDefs {
 
     }
 
+    @When("click to new task input box")
+    public void click_to_new_task_input_box() {
+       tasksPage.taskNameInputBox.click();
+       BrowserUtils.sleep(3);
+    }
+    @When("write a new task name {string} to new task input box and click enter")
+    public void write_a_new_task_name_to_new_task_input_box_and_click_enter(String name) {
+        tasksPage.taskNameInputBox.sendKeys(name + Keys.ENTER);
+        BrowserUtils.sleep(3);
+    }
+    @Then("user should see the the new task name link")
+    public void user_should_see_the_the_new_task_name_link() {
+       Assert.assertTrue(tasksPage.taskModule.isDisplayed());
+        BrowserUtils.sleep(3);
+    }
+
 }

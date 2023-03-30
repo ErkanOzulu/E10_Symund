@@ -23,6 +23,14 @@ public class TasksPage extends BasePage {
 @FindBy(xpath = "(//a[@class='app-navigation-entry-link'])[8]")
     public WebElement newListLink;
 
+//After creating task list
+
+@FindBy(xpath = "//input[@id='target']")
+public WebElement taskNameInputBox;
+
+@FindBy(xpath = "//div[@class='task-info']")
+    public WebElement taskModule;
+
 
 
 
