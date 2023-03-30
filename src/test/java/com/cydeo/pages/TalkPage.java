@@ -27,4 +27,7 @@ public class TalkPage extends BasePage {
     public List<WebElement> participants;
 @FindBy(xpath = "//span[.='Remove participant']")
     public WebElement removeParticipant;
+
+@FindBy(xpath = "//span[@class='user-bubble__title']")
+    public List<WebElement> addedNames;
 }

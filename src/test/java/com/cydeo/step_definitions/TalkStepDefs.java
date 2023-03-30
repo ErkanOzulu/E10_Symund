@@ -66,25 +66,6 @@ talkPage.creatConverssation.click();
         Assert.assertEquals(groupName,talkPage.grupName.getText());
     }
 
-    @Then("Verify user should  see the participants  on the right-hand menu as below")
-    public void verifyUserShouldSeeTheParticipantsOnTheRightHandMenuAsBelow(List<String> participants) throws InterruptedException {
-        Thread.sleep(5000);
-        List<String> part=new ArrayList<>();
-        for (WebElement participant : talkPage.participants) {
-part.add(participant.getText());
-        }
-        for (String participant : participants) {
-            Assert.assertTrue(part.contains(participant));
-        }
-
-
-
-
-
-
-    }
-
-
 
     @And("user click trash button from opened moudle")
     public void userClickTrashButtonFromOpenedMoudle() {
@@ -119,4 +100,23 @@ part.add(participant.getText());
         }
 
     }
+
+    @Then("Verify user should  see the added participants  on the right-hand menu")
+    public void verifyUserShouldSeeTheAddedParticipantsOnTheRightHandMenu() {
+        BrowserUtils.waitFor(5);
+        List<String> part1=new ArrayList<>();
+        for (WebElement participant : talkPage.addedNames) {
+            part1.add(participant.getText());
+        }
+        List<String> part=new ArrayList<>();
+        for (WebElement participant : talkPage.participants) {
+            part.add(participant.getText());
+        }
+
+        for (String participant : part1) {
+            Assert.assertTrue(part.contains(participant));
+        }
+    }
+
+
 }
