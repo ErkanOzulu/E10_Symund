@@ -16,11 +16,9 @@ import org.junit.runner.RunWith;
         glue = "com/cydeo/step_definitions",
         dryRun = false,
         stepNotifications = true,
-        tags = "@deck",
+        tags = "@SYMU10-546",
         publish=true
 )
 
 public class SymundRunner {
-
-
 }

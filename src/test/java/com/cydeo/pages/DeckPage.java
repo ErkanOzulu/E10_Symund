@@ -11,6 +11,7 @@ public class DeckPage extends BasePage{
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
+
     @FindBy(xpath = "//a[@class=\"app-navigation-toggle\"]")
     public WebElement threeLineButton;
 
@@ -23,8 +24,6 @@ public class DeckPage extends BasePage{
     @FindBy(xpath = "//input[@class=\"icon-confirm\"]")
     public WebElement inputBoardNameSubmitButton;
 
-    @FindBy(xpath = "//ul[@class=\"app-navigation-entry__children\"]//span")
-    public WebElement boardAddedVerifyButton;
 
 
 

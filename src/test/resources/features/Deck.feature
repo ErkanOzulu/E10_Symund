@@ -6,14 +6,14 @@ Feature: Deck Module
     Given user is logged in and on the dashboard page
     And user navigates to "deck"
 
-  @deck
+  @SYMU10-546
   Scenario Outline: User can create a new board
     When User can see the three-line button and click it
     And User see the opened sidebar
     And User see the add-board button and click it
-    And User sees the popup box and enters the <"board name">
+    And User sees the popup box and enters the "<board name>"
     And User click the submit button
-    Then User can see the created <"board name"> on the side bar
+    Then User can see the created "<board name>" on the side bar
 
     Examples:
       | board name  |
