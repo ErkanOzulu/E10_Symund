@@ -30,4 +30,21 @@ public class TalkPage extends BasePage {
 
 @FindBy(xpath = "//span[@class='user-bubble__title']")
     public List<WebElement> addedNames;
+
+@FindBy(xpath = "//div[@class='new-message-form__advancedinput']")
+    public WebElement inputMessage;
+@FindBy(xpath = "//div[@class='message-status has-tooltip']")
+    public WebElement messageTik;
+
+@FindBy(xpath = "//div[@class='trigger']/button")
+    public WebElement grupmodule;
+@FindBy(xpath = "//span[.='Delete conversation']")
+    public WebElement deleteGroup;
+@FindBy(xpath = "//button[.='Yes']")
+    public WebElement yesPopup;
+@FindBy(xpath = "//span[@class='acli__content__line-one__title']")
+    public List<WebElement> groups;
+
+    @FindBy(xpath = "//span[@class='acli__content__line-one__title']")
+    public WebElement group;
 }
