@@ -14,3 +14,8 @@ Feature:Deleted Files Tab Functionality under Files Module
     When user clicks Deleted files tab
     Then verify that user can see deleted files board
 
+  Scenario: User can see the most recent deleted file in the first line of the deleted file
+    When user selects a file and click delete
+    And navigates to Deleted files tab
+    When user clicks order by "Deleted"
+    Then verify that user should be able to see the most recent deleted file in the first line
