@@ -19,3 +19,10 @@ Feature:Deleted Files Tab Functionality under Files Module
     And navigates to Deleted files tab
     When user clicks order by "Deleted"
     Then verify that user should be able to see the most recent deleted file in the first line
+
+  Scenario: User can order the all deleted files by newest to oldest or visa versa
+    Given user clicks Deleted files tab
+    And there are at least two different files that were deleted in the different time periods
+    When user clicks order by "Deleted"
+    Then Verify that all deleted files can be ordered by newest to oldest or visa versa
+
