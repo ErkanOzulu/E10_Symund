@@ -26,3 +26,8 @@ Feature:Deleted Files Tab Functionality under Files Module
     When user clicks order by "Deleted"
     Then Verify that all deleted files can be ordered by newest to oldest or visa versa
 
+  Scenario: User can order alphabetically all the deleted files based on their names
+    Given  user clicks Deleted files tab
+    And there are at least two different files that were deleted in the different time periods
+    When user clicks order by "Name"
+    Then Verify that all deleted files can be ordered by alphabetically  based on their names
