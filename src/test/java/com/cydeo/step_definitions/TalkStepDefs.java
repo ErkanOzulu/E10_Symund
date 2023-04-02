@@ -150,12 +150,12 @@ Assert.assertTrue(talkPage.messageTik.isDisplayed());
     @And("User click yes button displayed popup")
     public void userClickYesButtonDisplayedPopup() {
         talkPage.yesPopup.click();
-
+        BrowserUtils.waitFor(3);
     }
 
     @Then("verify {string}  has been deleted")
     public void verifyHasBeenDeleted(String group) {
-BrowserUtils.waitFor(5);
+BrowserUtils.waitFor(3);
 
 
         for (WebElement element : talkPage.groups) {
