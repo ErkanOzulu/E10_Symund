@@ -27,4 +27,7 @@ public class DeletedFilesPage extends FilesPageE {
     @FindBy(xpath = "//div[@id='app-content-trashbin']/table/thead/tr/th")
     public List<WebElement>order;
 
+    @FindBy(xpath = "(//span[@class='dirinfo'])[2]")
+    public WebElement info;
+
 }

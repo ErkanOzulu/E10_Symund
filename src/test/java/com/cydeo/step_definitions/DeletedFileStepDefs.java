@@ -8,11 +8,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class DeletedFileStepDefs {
@@ -82,12 +86,17 @@ public class DeletedFileStepDefs {
     @When("user clicks order by {string}")
     public void user_clicks_header(String orderType) {
 
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true)", deletedFilesPage.info);
+
         if (orderType.equalsIgnoreCase("deleted")) {
             orderType = "Date";
 
             for (WebElement element : deletedFilesPage.alldeletedFilesDate) {
-                dFilesBeforeOrder.add(element.getText());
+                dFilesBeforeOrder.add(element.getAttribute("data-original-title"));
             }
+
+            System.out.println(dFilesBeforeOrder.size());
 
         } else {
             for (WebElement element : deletedFilesPage.alldeletedFilesName) {
@@ -96,17 +105,22 @@ public class DeletedFileStepDefs {
         }
 
 
+        Driver.getDriver().navigate().refresh();
         for (WebElement each : deletedFilesPage.order) {
 
             if (each.getAttribute("id").contains(orderType)) {
+                wait.until(ExpectedConditions.visibilityOf(each));
                 each.click();
+                break;
             }
         }
 
+        js.executeScript("arguments[0].scrollIntoView(true)", deletedFilesPage.info);
 
         if (orderType.equalsIgnoreCase("Date")) {
+            wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.alldeletedFilesDate.get(dFilesBeforeOrder.size() - 1)));
             for (WebElement element : deletedFilesPage.alldeletedFilesDate) {
-                dFilesAfterOrder.add(element.getText());
+                dFilesAfterOrder.add(element.getAttribute("data-original-title"));
             }
         } else {
             for (WebElement element : deletedFilesPage.alldeletedFilesName) {
@@ -117,15 +131,56 @@ public class DeletedFileStepDefs {
 
     @Then("Verify that all deleted files can be ordered by newest to oldest or visa versa")
     public void verify_that_all_deleted_files_can_be_ordered_by_newest_to_oldest_or_visa_versa() {
+
         System.out.println("dFilesBeforeOrder = " + dFilesBeforeOrder);
+
+        List<Long> dateValueBefore = new ArrayList<>();
+        for (String each : dFilesBeforeOrder) {
+            Date date;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy hh:mm a", Locale.ENGLISH);
+                date = sdf.parse(each);
+
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            long millis = date.getTime();
+
+            dateValueBefore.add(millis);
+        }
+
+
         System.out.println("dFilesAfterOrder = " + dFilesAfterOrder);
-        Collections.reverse(dFilesAfterOrder);
+
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yyyy '@'hh:mm a");
+//        Collections.sort(dFilesAfterOrder, (s1, s2) -> LocalDateTime.parse(s1, formatter).
+//                compareTo(LocalDateTime.parse(s2, formatter)));
+//Sort String Date
+
+        List<Long> dateValueAfter = new ArrayList<>();
+        for (String each : dFilesAfterOrder) {
+
+            Date date;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy hh:mm a", Locale.ENGLISH);
+
+
+                date = sdf.parse(each);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            long millis = date.getTime();
+
+            dateValueAfter.add(millis);
+        }
+        Collections.reverse(dateValueBefore);
 
         System.out.println("after reverse: " + dFilesAfterOrder);
 
-        Assert.assertEquals(dFilesBeforeOrder, dFilesAfterOrder);
-  //str.replaceAll("[^\\d.]", "");
-
+        Assert.assertEquals(dateValueBefore, dateValueAfter);
+        //str.replaceAll("[^\\d.]", "");
+        //https://www.unixtimestamp.com/
+        //https://www.javatpoint.com/java-timestamp
 
     }
 
@@ -147,10 +202,10 @@ public class DeletedFileStepDefs {
 
     @When("user selects a file and click delete")
     public void user_selects_a_file_and_click_delete() {
-        Actions actions=new Actions(Driver.getDriver());
+        Actions actions = new Actions(Driver.getDriver());
         wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.allFilles.get(0)));
 
-      firstFile= deletedFilesPage.allFilles.get(0).getText();
+        firstFile = deletedFilesPage.allFilles.get(0).getText();
         actions.contextClick(deletedFilesPage.allFilles.get(0)).perform();
 
         wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.deleteButton));
@@ -158,19 +213,18 @@ public class DeletedFileStepDefs {
         deletedFilesPage.deleteButton.click();
 
     }
+
     @When("navigates to Deleted files tab")
     public void navigates_to_deleted_files_tab() {
-        wait.until(ExpectedConditions.visibilityOf( deletedFilesPage.deletedFiles));
-       deletedFilesPage.deletedFiles.click();
+        wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.deletedFiles));
+        deletedFilesPage.deletedFiles.click();
     }
+
     @Then("verify that user should be able to see the most recent deleted file in the first line")
     public void verify_that_user_should_be_able_to_see_the_most_recent_deleted_file_in_the_first_line() {
 
         Assert.assertEquals(firstFile, deletedFilesPage.alldeletedFilesName.get(0).getText());
 
     }
-
-
-
-
 }
+
