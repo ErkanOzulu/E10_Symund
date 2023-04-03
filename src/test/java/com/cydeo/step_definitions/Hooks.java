@@ -1,12 +1,23 @@
 package com.cydeo.step_definitions;
 
+import com.cydeo.pages.DashboardPage;
+import com.cydeo.pages.DeckPage;
+import com.cydeo.pages.LoginPage;
+import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
 
 public class Hooks {
+
+
 
     /*
     In the class we will be able to pass pre&post conditions to each scenario and each step
