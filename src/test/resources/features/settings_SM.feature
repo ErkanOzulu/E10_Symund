@@ -10,7 +10,6 @@ Feature: Settings should be test step by step
     Then user verify to open new page
     Then verify user should see "<looked>"
 
-
     Examples:
       | looked |
       | name   |
