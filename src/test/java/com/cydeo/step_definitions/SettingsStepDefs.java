@@ -8,8 +8,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class SettingsStepDefs extends BasePage {
 BrowserUtils browserUtils=new BrowserUtils();
@@ -44,24 +49,54 @@ settingsPage.settingIcon.click();
     @Then("verify user should see {string}")
     public void verifyUserShouldSee(String looked) {
        settingsPage.verifySettingDashboard(looked);
-      ;
+
     }
 
 
 
     @Then("user verify full name value should be in profil icon")
     public void userVerifyFullNameValueShouldBeInProfilIcon() {
+        String actual=settingsPage.fullName.getAttribute("value");
+        System.out.println(actual);
+        String expected=settingsPage.settingsMenu.getAttribute("title");
+        System.out.println(expected);
+        Assert.assertEquals(expected,actual);
     }
 
     @And("user click to phone number lock")
     public void userClickToPhoneNumberLock() {
+        settingsPage.phoneLockIcon.click();
+
     }
 
     @Then("verify user should see private section")
     public void verifyUserShouldSeePrivateSection() {
+        String actual = settingsPage.phonePrivate.getText();
+
+        String expected="Private";
+        Assert.assertEquals(expected,actual);
+
+
     }
 
     @Then("verify user should see current time")
     public void verifyUserShouldSeeCurrentTime() {
+        wait.until(ExpectedConditions.titleIs("Settings - Symund - QA"));
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String formattedDate = localDateTime.format(formatter);
+
+
+        String expected=formattedDate;
+
+        String actual=settingsPage.timeOfSettngs.getText();
+
+        System.out.println("actual = " + actual);
+        System.out.println("expected = " + expected);
+        Assert.assertTrue(actual.contains(expected));
+
+        // Execute JavaScript code to get the current time
+
     }
 }
