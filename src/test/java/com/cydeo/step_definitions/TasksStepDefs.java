@@ -43,22 +43,108 @@ public class TasksStepDefs {
 
         Assert.assertTrue(tasksPage.newListLink.isDisplayed());
 
+
+
+       tasksPage.controlIcon.click();
+        BrowserUtils.sleep(3);
+
+       tasksPage.deleteBtn.click();
+       BrowserUtils.sleep(8);
+
+
+    }
+
+    @When("added new task list with {string} name")
+    public void added_new_task_list_with_name(String name) {
+        //tasksPage.tasksLinkBtn.click();
+        tasksPage.addListLinkBtn.click();
+        BrowserUtils.sleep(3);
+        tasksPage.newListNameInputBox.sendKeys(name + Keys.ENTER);
+        BrowserUtils.sleep(3);
+
+
     }
 
     @When("click to new task input box")
     public void click_to_new_task_input_box() {
        tasksPage.taskNameInputBox.click();
        BrowserUtils.sleep(3);
+
     }
+
+
     @When("write a new task name {string} to new task input box and click enter")
     public void write_a_new_task_name_to_new_task_input_box_and_click_enter(String name) {
         tasksPage.taskNameInputBox.sendKeys(name + Keys.ENTER);
         BrowserUtils.sleep(3);
     }
-    @Then("user should see the the new task name link")
-    public void user_should_see_the_the_new_task_name_link() {
+    @Then("user should see the new task name link")
+    public void user_should_see_the_new_task_name_link() {
        Assert.assertTrue(tasksPage.taskModule.isDisplayed());
         BrowserUtils.sleep(3);
+
+        tasksPage.controlIcon.click();
+        BrowserUtils.sleep(3);
+
+        tasksPage.deleteBtn.click();
+        BrowserUtils.sleep(8);
+
+
+    }
+
+    @When("click to completed task checkbox on the task module")
+    public void click_to_completed_task_checkbox_on_the_task_module() {
+
+        tasksPage.completedTaskCheckBox.click();
+        BrowserUtils.sleep(3);
+    }
+    @Then("user should see the completed date message on the task module")
+    public void user_should_see_the_completed_date_message_on_the_task_module() {
+
+        Assert.assertTrue(tasksPage.comletedTaskHeader.isDisplayed());
+
+
+        tasksPage.controlIcon.click();
+        BrowserUtils.sleep(3);
+
+        tasksPage.deleteBtn.click();
+        BrowserUtils.sleep(8);
+
+    }
+
+    @When("click to the star icon on the right side of task line")
+    public void click_to_the_star_icon_on_the_right_side_of_task_line() {
+
+        tasksPage.starIcon.click();
+        BrowserUtils.sleep(3);
+    }
+
+
+    @Then("user should see the new task in important tasks list")
+    public void user_should_see_the_new_task_in_important_tasks_list() {
+
+        Assert.assertTrue(tasksPage.importantTaskModule.isDisplayed());
+        BrowserUtils.sleep(3);
+
+        tasksPage.controlIcon.click();
+        BrowserUtils.sleep(3);
+
+        tasksPage.deleteBtn.click();
+        BrowserUtils.sleep(8);
+
+    }
+
+    @Then("user should see the number of all uncompleted tasks next to the Current tab")
+    public void user_should_see_the_number_of_all_uncompleted_tasks_next_to_the_current_tab() {
+
+        Assert.assertTrue(tasksPage.currentUncompletedTasksNumber.isDisplayed());
+
+        tasksPage.controlIcon.click();
+        BrowserUtils.sleep(3);
+
+        tasksPage.deleteBtn.click();
+        BrowserUtils.sleep(8);
+
     }
 
 }
