@@ -25,9 +25,10 @@ public class DeletedFileStepDefs {
     LoginPage loginPage = new LoginPage();
     List<String> dFilesBeforeOrder = new ArrayList<>();
     List<String> dFilesAfterOrder = new ArrayList<>();
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 
     String firstFile;
+
 
 
     @Given("user is logged in and navigates to {string}")
@@ -135,6 +136,8 @@ public class DeletedFileStepDefs {
         System.out.println("dFilesBeforeOrder = " + dFilesBeforeOrder);
 
         List<Long> dateValueBefore = new ArrayList<>();
+
+
         for (String each : dFilesBeforeOrder) {
             Date date;
             try {
@@ -149,8 +152,8 @@ public class DeletedFileStepDefs {
             dateValueBefore.add(millis);
         }
 
+        System.out.println("dateValueBefore = " + dateValueBefore);
 
-        System.out.println("dFilesAfterOrder = " + dFilesAfterOrder);
 
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yyyy '@'hh:mm a");
 //        Collections.sort(dFilesAfterOrder, (s1, s2) -> LocalDateTime.parse(s1, formatter).
@@ -173,9 +176,12 @@ public class DeletedFileStepDefs {
 
             dateValueAfter.add(millis);
         }
+        System.out.println("dFilesAfterOrder = " + dFilesAfterOrder);
+        System.out.println("dateValueAfter = " + dateValueAfter);
+
         Collections.reverse(dateValueBefore);
 
-        System.out.println("after reverse: " + dFilesAfterOrder);
+        System.out.println("after reverse: " + dateValueBefore);
 
         Assert.assertEquals(dateValueBefore, dateValueAfter);
         //str.replaceAll("[^\\d.]", "");
@@ -224,6 +230,34 @@ public class DeletedFileStepDefs {
     public void verify_that_user_should_be_able_to_see_the_most_recent_deleted_file_in_the_first_line() {
 
         Assert.assertEquals(firstFile, deletedFilesPage.alldeletedFilesName.get(0).getText());
+
+    }
+
+    @Then("user navigates to {string} and click three dots icon")
+    public void user_navigates_to_and_click_three_dots_icon(String fileName) {
+
+       deletedFilesPage.clickThreedot(fileName);
+
+
+
+    }
+
+    @Then("user clicks Delete permanently")
+    public void user_clicks_delete_permanently() {
+        wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.deletePermanently));
+        deletedFilesPage.deletePermanently.click();
+    }
+
+    @Then("Verify that user shouldn't see the {string} no longer in the deleted files")
+    public void verify_that_user_shouldn_t_see_the_no_longer_in_the_deleted_files(String fileName) {
+
+
+        for (WebElement each : deletedFilesPage.allDeletedFiles) {
+
+            Assert.assertFalse(each.getAttribute("data-id").equals(deletedFilesPage.getSelectedFileId()));
+
+        }
+
 
     }
 }
