@@ -3,8 +3,8 @@ Feature:Deleted Files Tab Functionality under Files Module
 
   As a user, I should be able to see all deleted files and delete/restore them permanently under the Deleted Files tab.
 
-  4.
-  5.User can restore any deleted file and see it again under the All Files tab
+
+
 
   Background: user is expected to be on the dashboard page
     Given user is logged in and navigates to "files"
@@ -31,9 +31,15 @@ Feature:Deleted Files Tab Functionality under Files Module
     And there are at least two different files that were deleted in the different time periods
     When user clicks order by "Name"
     Then Verify that all deleted files can be ordered by alphabetically  based on their names
-
+@wip
   Scenario:User can delete any deleted file permenantly by using the three dots icon in the file’s line
     Given  user clicks Deleted files tab
-    Then user navigates to "Readme" and click three dots icon
+    Then user navigates to "Ahmet" and click three dots icon
     And user clicks Delete permanently
-    Then Verify that user shouldn't see the "Readme" no longer in the deleted files
+    Then Verify that user shouldn't see the "Ahmet" no longer in the deleted files
+
+  Scenario:User can restore any deleted file and see it again under the All Files tab
+    Given  user clicks Deleted files tab
+    Then user navigates to "Ahmet"
+    And user clicks Restore
+    Then Verify that an restore "Ahmet "and see it again under the All Files tab
