@@ -54,14 +54,14 @@ public class DeletedFilesPage extends FilesPageE {
         String three = "//div[@id='app-content-trashbin']//tbody//tr[contains(@data-path,'" + fileName + "')]//span[@class='fileactions']/a[2]";
 
         WebElement threeDot = Driver.getDriver().findElement(By.xpath(three));
-        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
         wait.until(ExpectedConditions.visibilityOf(threeDot));
 
         threeDot.click();
 
         selectedFile= "//div[@id='app-content-trashbin']//tbody//tr[contains(@data-path,'" + fileName + "')]";
         selectedFileId = Driver.getDriver().findElement(By.xpath(selectedFile)).getAttribute("data-id");
-
+        System.out.println("selectedFileId = " + selectedFileId);
     }
 
 

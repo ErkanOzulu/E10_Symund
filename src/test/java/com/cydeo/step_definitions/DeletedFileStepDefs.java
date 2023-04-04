@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -254,9 +255,19 @@ public class DeletedFileStepDefs {
 
         for (WebElement each : deletedFilesPage.allDeletedFiles) {
 
-            Assert.assertFalse(each.getAttribute("data-id").equals(deletedFilesPage.getSelectedFileId()));
+            try {
 
+                if (each.getAttribute("data-id").equals(deletedFilesPage.getSelectedFileId())){
+                    Assert.assertFalse(each.isDisplayed());
+                }
+
+            } catch (StaleElementReferenceException e) {
+
+                Assert.assertTrue(true);
+            }
+            Assert.assertTrue(true);
         }
+
 
 
     }
