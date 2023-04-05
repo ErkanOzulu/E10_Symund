@@ -53,6 +53,12 @@ Feature: Deck Module
     And User see assign to me button and click on it
     Then User see the assigned to me image under card
 
+    Scenario: User can move any card on the current board to any other list of other board
+      When User is on the Deck page and created "Galatasaray" board
+      And User see the "Main Team" list name and "Kerem Akturkoglu" card under the list
+      And User move the "Kerem Akturkoglu" card under "U19 Team" list
+      Then User see the "U19 Team" list name and "Kerem Akturkoglu" card under the list
+
 
 
 

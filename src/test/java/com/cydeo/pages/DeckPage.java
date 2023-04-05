@@ -49,7 +49,8 @@ public class DeckPage extends BasePage{
     @FindBy(xpath = "//div[@data-original-title=\"null\"]")
     public WebElement assignedToMeImage;
 
-
+    @FindBy(xpath = "(//div[@class=\"smooth-dnd-container vertical\"])[2]")
+    public WebElement secondListArea;
 
 
     public void createBoardBeforeScenarioDeckModule(String boardName){
@@ -116,7 +117,10 @@ public class DeckPage extends BasePage{
     public void cardNameCreatedUnderRightListVerify(String cardName, String listName){
 
         String cardNameUnderListNameText = "//span[contains(text(),'"+ cardName +"')]/../../../../../../../div/h3";
+        BrowserUtils.sleep(3);
         WebElement cardNameUnderListName = Driver.getDriver().findElement(By.xpath(cardNameUnderListNameText));
+        System.out.println("cardNameUnderListName.getText() = " + cardNameUnderListName.getText());
+        System.out.println("listName = " + listName);
         Assert.assertTrue(cardNameUnderListName.getText().contains(listName));
 
     }
