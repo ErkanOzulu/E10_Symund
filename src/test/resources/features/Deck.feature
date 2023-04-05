@@ -34,7 +34,7 @@ Feature: Deck Module
       | U23 Team  |
       | U19 Team  |
 
-    @SYMU10-587
+  @SYMU10-587
   Scenario Outline: User can add a new card/task on any list on the current board
     When User is on the Deck page and created "Galatasaray" board
     And User click the add list button, created the "Main Team" list and click add card button
@@ -45,6 +45,14 @@ Feature: Deck Module
       | card name        |
       | Kerem Akturkoglu |
       | Fernando Muslera |
+
+  @SYMU10-588
+  Scenario: User can assign any card/task to himself/herself by using the three dots on the related card
+    When User is on the Deck page and created "Galatasaray" board
+    When User see and click on three dots button under any task
+    And User see assign to me button and click on it
+    Then User see the assigned to me image under card
+
 
 
 

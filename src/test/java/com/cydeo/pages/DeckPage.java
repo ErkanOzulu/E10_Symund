@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
 
 public class DeckPage extends BasePage{
 
@@ -40,6 +39,15 @@ public class DeckPage extends BasePage{
 
     @FindBy(xpath = "(//span[@class=\"app-navigation-entry__title\"])[3]")
     public WebElement firstBoard;
+
+    @FindBy(xpath = "(//button[@aria-expanded=\"false\"])[5]")
+    public WebElement threeDotsButtonUnderCard;
+
+    @FindBy(xpath = "//span[text()='Assign to me']")
+    public WebElement assignToMeButton;
+
+    @FindBy(xpath = "//div[@data-original-title=\"null\"]")
+    public WebElement assignedToMeImage;
 
 
 
