@@ -1,8 +1,11 @@
 package com.cydeo.pages;
 
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,12 +21,10 @@ public class DeletedFilesPage extends FilesPageE {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    private String selectedFile;
-    private String selectedFileId;
 
-    public String getSelectedFile() {
-        return selectedFile;
-    }
+    private String selectedFileId;
+   public WebElement selectedFile;
+
 
     public String getSelectedFileId() {
         return selectedFileId;
@@ -50,31 +51,31 @@ public class DeletedFilesPage extends FilesPageE {
     @FindBy(xpath = "(//span[.='Delete permanently'])[2]")
     public WebElement deletePermanently;
 
-    public void clickThreedot(String fileName) {
+    public WebElement threedot(String fileName) {
+
         String three = "//div[@id='app-content-trashbin']//tbody//tr[contains(@data-path,'" + fileName + "')]//span[@class='fileactions']/a[2]";
-
-        WebElement threeDot = Driver.getDriver().findElement(By.xpath(three));
-        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
-        wait.until(ExpectedConditions.visibilityOf(threeDot));
-
-        threeDot.click();
-
-        selectedFile= "//div[@id='app-content-trashbin']//tbody//tr[contains(@data-path,'" + fileName + "')]";
+        String selectedFile = "//div[@id='app-content-trashbin']//tbody//tr[contains(@data-path,'" + fileName + "')]";
         selectedFileId = Driver.getDriver().findElement(By.xpath(selectedFile)).getAttribute("data-id");
         System.out.println("selectedFileId = " + selectedFileId);
+
+        BrowserUtils.waitFor(2);
+        WebElement threeDot = Driver.getDriver().findElement(By.xpath(three));
+
+        return threeDot;
+
     }
 
 
-    public void clickRestore(String fileName) {
+    public WebElement restore(int index) {
 
+       selectedFile = allDeletedFiles.get(index);
 
-        selectedFile= "//div[@id='app-content-trashbin']//tbody//tr[contains(@data-path,'" + fileName + "')]";
-        selectedFileId = Driver.getDriver().findElement(By.xpath(selectedFile)).getAttribute("data-id");
+        selectedFileId = selectedFile.getAttribute("data-id");
 
-        String restore = "//div[@id='app-content-trashbin']//tbody//tr[contains(@data-path,'" + fileName + "')]//span[@class='fileactions']/a[1]";
+        String restore = "//tr[@data-id='"+selectedFileId+"']//span[@class='fileactions']/a[1]";
+        System.out.println("id in restore method = "+selectedFileId);
 
-        Driver.getDriver().findElement(By.xpath(restore)).click();
-
+     return    Driver.getDriver().findElement(By.xpath(restore));
 
 
     }

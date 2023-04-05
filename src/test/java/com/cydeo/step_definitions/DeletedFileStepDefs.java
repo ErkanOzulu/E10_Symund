@@ -2,12 +2,15 @@ package com.cydeo.step_definitions;
 
 import com.cydeo.pages.DeletedFilesPage;
 import com.cydeo.pages.LoginPage;
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -26,10 +29,16 @@ public class DeletedFileStepDefs {
     LoginPage loginPage = new LoginPage();
     List<String> dFilesBeforeOrder = new ArrayList<>();
     List<String> dFilesAfterOrder = new ArrayList<>();
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 
+    List<String> dFoldersBeforeOrder = new ArrayList<>();
+    List<String> dFoldersAfterOrder = new ArrayList<>();
+
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 60);
+
+    JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+
+    Actions actions = new Actions(Driver.getDriver());
     String firstFile;
-
 
 
     @Given("user is logged in and navigates to {string}")
@@ -43,7 +52,7 @@ public class DeletedFileStepDefs {
     @When("user clicks Deleted files tab")
     public void user_clicks_deleted_files_tab() {
 
-        deletedFilesPage.deletedFiles.click();
+        deletedFilesPage.deletedFilesTab.click();
 
     }
 
@@ -88,7 +97,7 @@ public class DeletedFileStepDefs {
     @When("user clicks order by {string}")
     public void user_clicks_header(String orderType) {
 
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.info));
         js.executeScript("arguments[0].scrollIntoView(true)", deletedFilesPage.info);
 
         if (orderType.equalsIgnoreCase("deleted")) {
@@ -101,8 +110,16 @@ public class DeletedFileStepDefs {
             System.out.println(dFilesBeforeOrder.size());
 
         } else {
+            int i = 0;
             for (WebElement element : deletedFilesPage.alldeletedFilesName) {
-                dFilesBeforeOrder.add(element.getText().toLowerCase());
+
+                if (deletedFilesPage.allDeletedFiles.get(i++).getAttribute("data-type").equals("dir")) {
+
+                    dFoldersBeforeOrder.add(element.getText().toLowerCase());
+                } else {
+                    dFilesBeforeOrder.add(element.getText().toLowerCase());
+                }
+
             }
         }
 
@@ -125,8 +142,18 @@ public class DeletedFileStepDefs {
                 dFilesAfterOrder.add(element.getAttribute("data-original-title"));
             }
         } else {
+            wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.alldeletedFilesName.get(dFilesBeforeOrder.size() - 1)));
+            int i = 0;
+
             for (WebElement element : deletedFilesPage.alldeletedFilesName) {
-                dFilesAfterOrder.add(element.getText().toLowerCase());
+
+                if (deletedFilesPage.allDeletedFiles.get(i++).getAttribute("data-type").equals("dir")) {
+
+                    dFoldersAfterOrder.add(element.getText().toLowerCase());
+                } else {
+                    dFilesAfterOrder.add(element.getText().toLowerCase());
+                }
+
             }
         }
     }
@@ -198,10 +225,12 @@ public class DeletedFileStepDefs {
         System.out.println("dFilesBeforeOrder = " + dFilesBeforeOrder);
         System.out.println("dFilesAfterOrder = " + dFilesAfterOrder);
         Collections.sort(dFilesBeforeOrder);
+        Collections.sort(dFoldersBeforeOrder);
 
         System.out.println("after sort " + dFilesBeforeOrder);
 
         Assert.assertEquals(dFilesBeforeOrder, dFilesAfterOrder);
+        Assert.assertEquals(dFoldersBeforeOrder, dFoldersAfterOrder);
 
 
     }
@@ -209,11 +238,11 @@ public class DeletedFileStepDefs {
 
     @When("user selects a file and click delete")
     public void user_selects_a_file_and_click_delete() {
-        Actions actions = new Actions(Driver.getDriver());
-        wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.allFilles.get(0)));
 
-        firstFile = deletedFilesPage.allFilles.get(0).getText();
-        actions.contextClick(deletedFilesPage.allFilles.get(0)).perform();
+        wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.allFillesName.get(0)));
+
+        firstFile = deletedFilesPage.allFillesName.get(0).getText(); //comes from FilesPageE because of inheritance
+        actions.contextClick(deletedFilesPage.allFillesName.get(0)).perform();
 
         wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.deleteButton));
 
@@ -223,8 +252,8 @@ public class DeletedFileStepDefs {
 
     @When("navigates to Deleted files tab")
     public void navigates_to_deleted_files_tab() {
-        wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.deletedFiles));
-        deletedFilesPage.deletedFiles.click();
+        wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.deletedFilesTab));
+        deletedFilesPage.deletedFilesTab.click();
     }
 
     @Then("verify that user should be able to see the most recent deleted file in the first line")
@@ -234,30 +263,32 @@ public class DeletedFileStepDefs {
 
     }
 
-    @Then("user navigates to {string} and click three dots icon")
-    public void user_navigates_to_and_click_three_dots_icon(String fileName) {
+    @Then("user navigates to {string} file and click three dots icon")
+    public void user_navigates_to_file_and_click_three_dots_icon(String fileName) {
 
-       deletedFilesPage.clickThreedot(fileName);
 
+        actions.moveToElement(deletedFilesPage.threedot(fileName)).click().pause(1000).perform();
 
 
     }
 
     @Then("user clicks Delete permanently")
     public void user_clicks_delete_permanently() {
+        BrowserUtils.sleep(3);
         wait.until(ExpectedConditions.visibilityOf(deletedFilesPage.deletePermanently));
         deletedFilesPage.deletePermanently.click();
+        Driver.getDriver().navigate().refresh();
     }
 
-    @Then("Verify that user shouldn't see the {string} no longer in the deleted files")
-    public void verify_that_user_shouldn_t_see_the_no_longer_in_the_deleted_files(String fileName) {
+    @Then("Verify that user shouldn't see the {string} file no longer in the deleted files")
+    public void verify_that_user_shouldn_t_see_the_file_no_longer_in_the_deleted_files(String fileName) {
 
 
         for (WebElement each : deletedFilesPage.allDeletedFiles) {
 
             try {
 
-                if (each.getAttribute("data-id").equals(deletedFilesPage.getSelectedFileId())){
+                if (each.getAttribute("data-id").equals(deletedFilesPage.getSelectedFileId())) {
                     Assert.assertFalse(each.isDisplayed());
                 }
 
@@ -269,7 +300,57 @@ public class DeletedFileStepDefs {
         }
 
 
+    }
 
+    @Then("user navigates to any file and click Restore")
+    public void user_navigates_to_any_file_and_click_restore() {
+
+        Random random = new Random();
+        int range = deletedFilesPage.alldeletedFilesName.size();
+        int int_random = random.nextInt(range);
+
+        js.executeScript("arguments[0].scrollIntoView(true)", deletedFilesPage.info);
+        wait.until(ExpectedConditions.elementToBeClickable(deletedFilesPage.restore(int_random)));
+
+        js.executeScript("arguments[0].click()", deletedFilesPage.restore(int_random));
+
+
+        // actions.moveToElement(deletedFilesPage.restore(int_random)).click().pause(1000).perform();
+
+    }
+
+    @And("user clicks All Files tab")
+    public void userClicksAllFilesTab() {
+
+        deletedFilesPage.allFilesTab.click();
+        Driver.getDriver().navigate().refresh();
+
+    }
+
+    @Then("Verify that  restore file and see it again under the All Files tab")
+    public void verify_that_restore_file_and_see_it_again_under_the_all_files_tab() {
+
+        js.executeScript("arguments[0].scrollIntoView(true)", deletedFilesPage.infoFilesPage);
+        wait.until(ExpectedConditions.stalenessOf(deletedFilesPage.selectedFile));
+
+        for (int i = 0; i <= 2; i++) {
+            try {
+                Assert.assertTrue(deletedFilesPage.selectedFile.isDisplayed());
+                break;
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
+//        for (WebElement each : deletedFilesPage.allFilles) {
+//            System.out.println(each.getAttribute("data-id"));
+//
+//            if (each.getAttribute("data-id").equals(deletedFilesPage.getSelectedFileId())) {
+//                Assert.assertTrue(true);
+//                break;
+//            }
+//
+//        }
+//        Assert.assertTrue(false);
     }
 }
 
