@@ -26,11 +26,14 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//div[@id='contacts-list']//div[@class='unknown']")
     public List<WebElement> initialsList;
 
-    @FindBy(xpath = "//div[@class='app-content-list-item-line-one']")
+    @FindBy(css = ".app-content-list-item-line-one")
     public List<WebElement> fullNameList;
 
     @FindBy(xpath = "(//a[@class='app-navigation-entry-link'])[1]")
     public WebElement allContacts;
+
+    @FindBy(xpath = "(//div[@class='app-navigation-entry__utils']/div)[1]")
+    public WebElement allContactsNumber;
 
 
     @FindBy(xpath = "//div[@class='action-item header-menu']/div/div/button")
@@ -38,4 +41,7 @@ public class ContactsPage extends BasePage {
 
     @FindBy(xpath = "//button//span[.='Delete']")
     public WebElement deleteButton;
+
+    @FindBy(xpath = "//div[@id='app-navigation-vue']/a")
+    public WebElement appNavToggle;
 }
