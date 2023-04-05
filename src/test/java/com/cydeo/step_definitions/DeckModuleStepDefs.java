@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class DeckModuleStepDefs {
 
@@ -119,6 +120,19 @@ public class DeckModuleStepDefs {
     @Then("User see the assigned to me image under card")
     public void user_see_the_assigned_to_me_image_under_card() {
         Assert.assertTrue(deckPage.assignedToMeImage.isDisplayed());
+    }
+
+    @When("User see the {string} list name and {string} card under the list")
+    public void user_see_the_list_name_and_card_under_the_list(String listName, String cardName) {
+        deckPage.cardNameCreatedUnderRightListVerify(cardName,listName);
+    }
+
+    @When("User move the {string} card under {string} list")
+    public void user_move_the_card_under_list(String cardName, String listName) {
+        String cardNamedText = "//span[contains(text(),'" + cardName + "')]/../../../../..";
+        WebElement card = Driver.getDriver().findElement(By.xpath(cardNamedText));
+        Actions action = new Actions(Driver.getDriver());
+        action.clickAndHold(card).pause(1000).moveToElement(deckPage.secondListArea).release(deckPage.secondListArea).perform();
     }
 
 
