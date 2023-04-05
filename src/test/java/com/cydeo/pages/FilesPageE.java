@@ -9,20 +9,26 @@ import java.util.List;
 public class FilesPageE extends BasePage {
 
     @FindBy(linkText = "Deleted files")
-    public WebElement deletedFiles;
+    public WebElement deletedFilesTab;
 
-    @FindBy(css="#app-navigation-toggle")
-    public WebElement iconMenu;
+    @FindBy(linkText= "All files")
+    public WebElement allFilesTab;
 
     @FindBy(xpath = "//div[@id='recommendations']//span[@class='name']")
     public List<WebElement> recentFiles;
 
 
     @FindBy(xpath = "//div[@id='app-content-files']//span[@class='innernametext']")
-    public List<WebElement>allFilles;
+    public List<WebElement> allFillesName;
+
+    @FindBy(xpath = "//div[@id=\"app-content-files\"]//tbody[@id='fileList']/tr")
+    public List<WebElement> allFilles;
 
     @FindBy(css = "#rightClickMenu>ul>li[class='action-5']")
     public WebElement deleteButton;
+
+    @FindBy(className = "dirinfo")
+    public WebElement infoFilesPage;
 
 
 }
