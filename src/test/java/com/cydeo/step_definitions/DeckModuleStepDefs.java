@@ -1,16 +1,11 @@
 package com.cydeo.step_definitions;
 
-import com.cydeo.pages.DashboardPage;
 import com.cydeo.pages.DeckPage;
-import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.BrowserUtils;
-import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.zh_cn.假如;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,8 +14,7 @@ import org.openqa.selenium.WebElement;
 public class DeckModuleStepDefs {
 
     DeckPage deckPage = new DeckPage();
-    LoginPage loginPage=new LoginPage();
-    DashboardPage dashboardPage=new DashboardPage();
+
 
     @When("User can see the three-line button and click it")
     public void user_can_see_the_three_line_button_and_click_it() {
@@ -109,6 +103,22 @@ public class DeckModuleStepDefs {
     @Then("User see the {string} under {string} list")
     public void user_see_the_under_list(String cardName, String listName) {
         deckPage.cardNameCreatedUnderRightListVerify(cardName,listName);
+    }
+
+
+    @When("User see and click on three dots button under any task")
+    public void user_see_and_click_on_three_dots_button_under_any_task() {
+        deckPage.threeDotsButtonUnderCard.isDisplayed();
+        deckPage.threeDotsButtonUnderCard.click();
+    }
+    @When("User see assign to me button and click on it")
+    public void user_see_assign_to_me_button_and_click_on_it() {
+        deckPage.assignToMeButton.isDisplayed();
+        deckPage.assignToMeButton.click();
+    }
+    @Then("User see the assigned to me image under card")
+    public void user_see_the_assigned_to_me_image_under_card() {
+        Assert.assertTrue(deckPage.assignedToMeImage.isDisplayed());
     }
 
 
