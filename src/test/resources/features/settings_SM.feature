@@ -1,3 +1,4 @@
+@SYMU10-574
 Feature: Settings should be test step by step
 
   Background:user is expected to be on the settings dashboard page
@@ -6,7 +7,8 @@ Feature: Settings should be test step by step
     When user click to settings part
 
 
-  Scenario Template: User should see part of settings
+  @SYMU10-569
+  Scenario Outline: User should see part of settings
     Then user verify to open new page
     Then verify user should see "<looked>"
 
@@ -16,14 +18,17 @@ Feature: Settings should be test step by step
       | email  |
       | phone  |
 
+  @SYMU10-570
   Scenario: User should see "profil name" in "full name"
     And user click to profil icon
     Then user verify full name value should be in profil icon
 
+  @SYMU10-571
   Scenario: user should see private when click to phone number lock
     And user click to phone number lock
     Then verify user should see private section
 
+  @SYMU10-572
   Scenario: User shoul see day current time in page
     Then verify user should see current time
 
