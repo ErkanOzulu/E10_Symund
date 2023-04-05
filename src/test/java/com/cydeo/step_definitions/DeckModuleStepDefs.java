@@ -10,6 +10,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.zh_cn.假如;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -91,8 +92,24 @@ public class DeckModuleStepDefs {
 
     @When("User is on the Deck page and created {string} board")
     public void userIsOnTheDeckPageAndCreatedBoard(String boardName) {
-        String str= boardName;
-        deckPage.createBoardBeforeScenarioDeckModule(str);
-
+        deckPage.createBoardBeforeScenarioDeckModule(boardName);
     }
+
+    @When("User click the add list button, created the {string} list and click add card button")
+    public void user_click_the_add_list_button_and_created_the_list(String string) {
+        deckPage.createdMainTeamListBeforeScenario(string);
+    }
+
+
+    @When("User see the input card name box under {string} and write the {string} and presses enter from keyboard")
+    public void user_see_the_input_card_name_box_under_and_write_the_and_presses_enter_from_keyboard(String listName, String cardName) {
+            deckPage.createCardName(listName,cardName);
+    }
+
+    @Then("User see the {string} under {string} list")
+    public void user_see_the_under_list(String cardName, String listName) {
+        deckPage.cardNameCreatedUnderRightListVerify(cardName,listName);
+    }
+
+
 }

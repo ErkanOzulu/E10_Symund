@@ -21,7 +21,7 @@ Feature: Deck Module
       | New 123     |
       | 123 new     |
 
-  @boardCreated
+  @SYMU10-582
   Scenario Outline: User can create a new list of card/task under any board
     When User is on the Deck page and created "Galatasaray" board
     And User see and click the + add list button
@@ -33,6 +33,19 @@ Feature: Deck Module
       | Main Team |
       | U23 Team  |
       | U19 Team  |
+
+    @SYMU10-587
+  Scenario Outline: User can add a new card/task on any list on the current board
+    When User is on the Deck page and created "Galatasaray" board
+    And User click the add list button, created the "Main Team" list and click add card button
+    And User see the input card name box under "Main Team" and write the "<card name>" and presses enter from keyboard
+    Then User see the "<card name>" under "Main Team" list
+
+    Examples:
+      | card name        |
+      | Kerem Akturkoglu |
+      | Fernando Muslera |
+
 
 
 
