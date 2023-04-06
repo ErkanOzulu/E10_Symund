@@ -114,6 +114,7 @@ public class DeckModuleStepDefs {
     }
     @When("User see assign to me button and click on it")
     public void user_see_assign_to_me_button_and_click_on_it() {
+        BrowserUtils.sleep(3);
         deckPage.assignToMeButton.isDisplayed();
         deckPage.assignToMeButton.click();
     }
