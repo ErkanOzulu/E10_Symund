@@ -27,6 +27,7 @@ Feature: Settings should be test step by step
   Scenario: user should see private when click to phone number lock
     And user click to phone number lock
     Then verify user should see private section
+    Then verify user click to private should see phone icon
 
   @SYMU10-572
   Scenario: User shoul see day current time in page

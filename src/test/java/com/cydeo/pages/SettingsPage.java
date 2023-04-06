@@ -26,6 +26,8 @@ public class SettingsPage {
     public WebElement phoneLockIcon;
     @FindBy(xpath = "//form[@id='phoneform']/h3/div/div/ul/li/a/p/strong")
     public WebElement phonePrivate;
+    @FindBy(xpath = "(//div[@class='federation-menu']/span)[4]")
+    public WebElement privateIcon;
     @FindBy(id="localeexample")
     public WebElement timeOfSettngs;
 

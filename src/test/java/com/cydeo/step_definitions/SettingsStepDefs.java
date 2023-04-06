@@ -77,11 +77,23 @@ settingsPage.settingIcon.click();
         Assert.assertEquals(expected,actual);
 
 
+
+
+
+    }
+
+    @Then("verify user click to private should see phone icon")
+    public void verifyUserClickToPrivateShouldSeePhoneIcon() {
+        settingsPage.phonePrivate.click();
+        String expectedIcon="phone";
+        String actualIcon=settingsPage.privateIcon.getAttribute("class");
+        Assert.assertTrue(actualIcon.contains(expectedIcon));
     }
 
     @Then("verify user should see current time")
     public void verifyUserShouldSeeCurrentTime() {
         wait.until(ExpectedConditions.titleIs("Settings - Symund - QA"));
+        browserUtils.sleep(3);
         LocalDateTime localDateTime = LocalDateTime.now();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -99,4 +111,6 @@ settingsPage.settingIcon.click();
         // Execute JavaScript code to get the current time
 
     }
+
+
 }
