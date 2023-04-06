@@ -3,7 +3,7 @@ Feature: Settings should be test step by step
 
   Background:user is expected to be on the settings dashboard page
     Given user is logged in and on the dashboard page
-    When user click to profil icon
+    When user click to profile icon
     When user click to settings part
 
 
@@ -19,9 +19,9 @@ Feature: Settings should be test step by step
       | phone  |
 
   @SYMU10-570
-  Scenario: User should see "profil name" in "full name"
-    And user click to profil icon
-    Then user verify full name value should be in profil icon
+  Scenario: User should see "profile name" in "full name"
+    And user click to profile icon
+    Then user verify full name value should be in profile icon
 
   @SYMU10-571
   Scenario: user should see private when click to phone number lock
@@ -30,6 +30,6 @@ Feature: Settings should be test step by step
     Then verify user click to private should see phone icon
 
   @SYMU10-572
-  Scenario: User shoul see day current time in page
+  Scenario: User should see day current time in page
     Then verify user should see current time
 

@@ -21,7 +21,7 @@ BrowserUtils browserUtils=new BrowserUtils();
     SettingsPage settingsPage=new SettingsPage();
     WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
 
-    @And("user click to profil icon")
+    @And("user click to profile icon")
     public void userClickToProfilIcon() {
 settingsPage.settingsImg.click();
 browserUtils.sleep(3);
@@ -54,7 +54,7 @@ settingsPage.settingIcon.click();
 
 
 
-    @Then("user verify full name value should be in profil icon")
+    @Then("user verify full name value should be in profile icon")
     public void userVerifyFullNameValueShouldBeInProfilIcon() {
         String actual=settingsPage.fullName.getAttribute("value");
         System.out.println(actual);
