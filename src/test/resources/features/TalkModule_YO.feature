@@ -1,4 +1,4 @@
-@wip
+
 Feature: Talk Module Functionality
 
   Background:

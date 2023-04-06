@@ -1,4 +1,4 @@
-@SYMU10-544 @wip
+@SYMU10-544
 Feature:Tasks Module Functionality
 
   As a user  I should be able to create a new task list or a single task and add any task to completed and important tasks list.
