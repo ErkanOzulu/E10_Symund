@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         glue = "com/cydeo/step_definitions",
         dryRun = false,
         stepNotifications = true,
-        tags = "@boardCreated",
+        tags = "@SYMU10-546 or @SYMU10-582 or @SYMU10-587 or @SYMU10-588 or @SYMU10-596 ",
         publish=true
 )
 

@@ -40,7 +40,7 @@ public class DeckPage extends BasePage{
     @FindBy(xpath = "(//span[@class=\"app-navigation-entry__title\"])[3]")
     public WebElement firstBoard;
 
-    @FindBy(xpath = "(//button[@aria-expanded=\"false\"])[5]")
+    @FindBy(xpath = "(//div[@class=\"card-controls compact-item\"])[1]/div/div//button")
     public WebElement threeDotsButtonUnderCard;
 
     @FindBy(xpath = "//span[text()='Assign to me']")
@@ -62,6 +62,7 @@ public class DeckPage extends BasePage{
         Driver.getDriver().get(ConfigurationReader.getProperty("symund.url"));
         loginPage.login();
         dashboardPage.navigateToModule(module);
+        BrowserUtils.sleep(3);
         deckPage.threeLineButton.click();
         BrowserUtils.sleep(3);
         System.out.println("firstBoard.getText() = " + firstBoard.getText());
@@ -115,8 +116,8 @@ public class DeckPage extends BasePage{
     }
 
     public void cardNameCreatedUnderRightListVerify(String cardName, String listName){
-
-        String cardNameUnderListNameText = "//span[contains(text(),'"+ cardName +"')]/../../../../../../../div/h3";
+        firstBoard.click();
+        String cardNameUnderListNameText = "//span[contains(text(),'" + cardName + "')]/../../../../../../..//h3";
         BrowserUtils.sleep(3);
         WebElement cardNameUnderListName = Driver.getDriver().findElement(By.xpath(cardNameUnderListNameText));
         System.out.println("cardNameUnderListName.getText() = " + cardNameUnderListName.getText());
