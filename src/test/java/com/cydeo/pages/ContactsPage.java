@@ -44,4 +44,22 @@ public class ContactsPage extends BasePage {
 
     @FindBy(xpath = "//div[@id='app-navigation-vue']/a")
     public WebElement appNavToggle;
+
+
+    @FindBy(xpath = "//button[@class='icon action-item__menutoggle icon-picture-force-white']")
+    public WebElement pictureIcon;
+    @FindBy(xpath = "//span[.='Choose from Files']/..")
+    public WebElement Choosefromfilesbutton;
+    @FindBy(xpath = "(//td[@class='filename'])[3]")
+    public WebElement picture_jpg;
+    @FindBy(xpath = "//button[.='Choose']")
+    public WebElement choose_button;
+    @FindBy(xpath = "//button[@aria-controls='menu-smmlf']")
+    public WebElement three_dot_button;
+    @FindBy(xpath = "(//span[@class='action-button__icon icon-delete'])[5]/..")
+    public WebElement delete_button;
+@FindBy(xpath = "//div[contains(@style,'background-image')]")
+    public WebElement verifyPicture;
+
+
 }
