@@ -17,37 +17,17 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//button[@id='new-contact-button']")
     public WebElement newContactButton;
 
-    @FindBy(xpath = "//input[@id='contact-fullname']")
-    public WebElement inputFullName;
-
-    @FindBy(xpath = "//input[@id='contact-avatar-upload']/../div/div")
-    public WebElement initials;
-
     @FindBy(xpath = "//div[@id='contacts-list']//div[@class='unknown']")
     public List<WebElement> initialsList;
 
     @FindBy(css = ".app-content-list-item-line-one")
     public List<WebElement> fullNameList;
 
-    @FindBy(css = ".app-content-list-item-line-one")
-    public WebElement firstNameList;
-
     @FindBy(xpath = "(//a[@class='app-navigation-entry-link'])[1]")
     public WebElement allContacts;
 
     @FindBy(xpath = "//div[@class='app-navigation-entry__counter']")
     public WebElement allContactsNumber;
-
-
-    @FindBy(xpath = "//div[@class='action-item header-menu']/div/div/button")
-    public WebElement threeDotButton;
-
-    @FindBy(xpath = "//button//span[.='Delete']")
-    public WebElement deleteButton;
-
-    @FindBy(xpath = "//div[@id='app-navigation-vue']/a")
-    public WebElement appNavToggle;
-
 
     @FindBy(xpath = "//button[@class='icon action-item__menutoggle icon-picture-force-white']")
     public WebElement pictureIcon;
@@ -61,7 +41,7 @@ public class ContactsPage extends BasePage {
     public WebElement three_dot_button;
     @FindBy(xpath = "(//span[@class='action-button__icon icon-delete'])[5]/..")
     public WebElement delete_button;
-@FindBy(xpath = "//div[contains(@style,'background-image')]")
+    @FindBy(xpath = "//div[contains(@style,'background-image')]")
     public WebElement verifyPicture;
 
 
