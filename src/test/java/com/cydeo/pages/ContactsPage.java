@@ -29,10 +29,13 @@ public class ContactsPage extends BasePage {
     @FindBy(css = ".app-content-list-item-line-one")
     public List<WebElement> fullNameList;
 
+    @FindBy(css = ".app-content-list-item-line-one")
+    public WebElement firstNameList;
+
     @FindBy(xpath = "(//a[@class='app-navigation-entry-link'])[1]")
     public WebElement allContacts;
 
-    @FindBy(xpath = "(//div[@class='app-navigation-entry__utils']/div)[1]")
+    @FindBy(xpath = "//div[@class='app-navigation-entry__counter']")
     public WebElement allContactsNumber;
 
 
@@ -54,7 +57,7 @@ public class ContactsPage extends BasePage {
     public WebElement picture_jpg;
     @FindBy(xpath = "//button[.='Choose']")
     public WebElement choose_button;
-    @FindBy(xpath = "//button[@aria-controls='menu-smmlf']")
+    @FindBy(xpath = "//div[@class='action-item header-menu']//button")
     public WebElement three_dot_button;
     @FindBy(xpath = "(//span[@class='action-button__icon icon-delete'])[5]/..")
     public WebElement delete_button;

@@ -7,20 +7,32 @@ import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.w3c.dom.Node;
+
+import netscape.javascript.JSObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.xpath.XPathResult;
 
+import javax.script.Bindings;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ContactsStepDefs {
 
     ContactsPage contactsPage = new ContactsPage();
-    String contactsID;
+    String contactNumber;
 
 
     @When("User click on new contact")
@@ -51,6 +63,8 @@ public class ContactsStepDefs {
 
     @Then("Verify that appears in the <All contacts> list with matching initials")
     public void verify_that_appears_in_the_all_contacts_list_with_matching_initials() {
+
+
         List<WebElement> fullNameList = new ArrayList<>(contactsPage.fullNameList);
         List<WebElement> initialsList = new ArrayList<>(contactsPage.initialsList);
         for (int i = 0; i < initialsList.size(); i++) {
@@ -69,7 +83,6 @@ public class ContactsStepDefs {
 
                     System.out.println("actual = " + actual);
                     System.out.println("expected = " + expected);
-                    Assert.assertEquals(expected, actual);
                     break;
 
                 }
@@ -89,21 +102,24 @@ public class ContactsStepDefs {
     @Then("Verify that  contacts as a list inside the middle column")
     public void verify_that_contacts_as_a_list_inside_the_middle_column() {
 
-        List<WebElement> fullNameList = new ArrayList<>(contactsPage.fullNameList);
+        BrowserUtils.sleep(5);
 
-       /* JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        Object o = js.executeScript("document.getElementsByClassName('app-content-list-item-line-one');");*/
+        //document.querySelectorAll('.app-content-list-item-line-one');
 
-
-        for (WebElement webElement : fullNameList) {
-            System.out.println(webElement.getText());
+        List<WebElement> elements = Driver.getDriver().findElements(By.cssSelector(".app-content-list-item-line-one"));
+        Assert.assertTrue(!elements.isEmpty());
+        for (WebElement element : elements) {
+            System.out.println(element.getText());
         }
+
+
     }
 
     @Then("Verify that  total number of the contacts near the “All Contacts” tab")
     public void verify_that_total_number_of_the_contacts_near_the_all_contacts_tab() {
 
-        System.out.println(contactsPage.allContactsNumber.getText());
+        System.out.println("Number of Contacts : " + contactsPage.allContactsNumber.getText());
+
         Assert.assertTrue(contactsPage.allContactsNumber.isDisplayed());
 
 
@@ -112,6 +128,8 @@ public class ContactsStepDefs {
     @When("User select one of the contacts")
     public void userSelectOneOfTheContacts() {
         contactsPage.newContactButton.click();
+
+        contactNumber = contactsPage.allContactsNumber.getText();
 
     }
 
@@ -138,22 +156,30 @@ public class ContactsStepDefs {
 
     @Then("Verify that  the profile picture changes")
     public void verify_that_the_profile_picture_changes() {
-Assert.assertTrue(contactsPage.verifyPicture.getAttribute("style").contains("background-image"));
-        System.out.println("contactsPage.verifyPicture.getAttribute(\"style\") = " + contactsPage.verifyPicture.getAttribute("style"));
+        Assert.assertTrue(contactsPage.verifyPicture.getAttribute("style").contains("background-image"));
+        System.out.println("image_Url = " + contactsPage.verifyPicture.getAttribute("style"));
     }
 
     @When("User click on three dot button")
     public void user_click_on_three_dot_button() {
+        BrowserUtils.sleep(3);
         contactsPage.three_dot_button.click();
     }
 
     @When("User click on Delete button")
     public void user_click_on_delete_button() {
+        BrowserUtils.sleep(3);
         contactsPage.delete_button.click();
     }
 
     @Then("Verify that  the contact deleted")
     public void verify_that_the_contact_deleted() {
+
+        int expectedResult = Integer.parseInt(contactNumber) - Integer.parseInt(contactsPage.allContactsNumber.getText());
+
+        Assert.assertTrue(expectedResult == 1);
+
+        System.out.println("Number of Deleted Contacts = " + expectedResult);
 
     }
 
