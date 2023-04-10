@@ -1,4 +1,4 @@
-@ionSYMU10-553
+@SYMU10-553
 Feature: Talk Module Functionality
 
   Background:
