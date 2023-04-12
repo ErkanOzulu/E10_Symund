@@ -79,6 +79,29 @@ public class DeckPage extends BasePage{
             firstBoard.click();
         }
     }
+    public void createBoardBeforeScenarioDeckModule2(String boardName){
+
+        DeckPage deckPage = new DeckPage();
+        DashboardPage dashboardPage=new DashboardPage();
+        String module = "deck";
+        dashboardPage.navigateToModule(module);
+        BrowserUtils.sleep(3);
+        deckPage.threeLineButton.click();
+        BrowserUtils.sleep(3);
+        System.out.println("firstBoard.getText() = " + firstBoard.getText());
+        boolean created = firstBoard.getAttribute("title").contains(boardName);
+        if ( created ) {
+            firstBoard.click();
+        }else{
+            deckPage.addBoardButton.click();
+            BrowserUtils.sleep(2);
+            deckPage.inputBoardNameBox.sendKeys(boardName);
+            deckPage.inputBoardNameSubmitButton.click();
+            Driver.getDriver().navigate().refresh();
+            BrowserUtils.sleep(3);
+            firstBoard.click();
+        }
+    }
 
     public boolean listNameIsDisplayed(String listName) {
         String xpathForList = "//h3[contains(text(), '" + listName + "')]";

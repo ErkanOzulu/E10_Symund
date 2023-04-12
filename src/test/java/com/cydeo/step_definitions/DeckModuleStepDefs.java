@@ -137,4 +137,12 @@ public class DeckModuleStepDefs {
     }
 
 
+    @When("User is on the Deck page and then created {string} board")
+    public void userIsOnTheDeckPageAndThenCreatedBoard(String boardName) {
+
+
+        deckPage.createBoardBeforeScenarioDeckModule2(boardName);
+
+
+    }
 }
