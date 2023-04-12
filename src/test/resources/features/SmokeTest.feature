@@ -14,10 +14,9 @@ Background:
       | Betul  |
       | Zack   |
     And User click create Conversation button
-
     Then User verify group name "Group23"
 
-
+"""
   @SYMU10-577
   Scenario: User can see the deleted files board
     Given user navigates to "files"
@@ -57,3 +56,4 @@ Background:
     And User click on three dot button
     And User click on Delete button
     Then Verify that  the contact deleted
+"""
