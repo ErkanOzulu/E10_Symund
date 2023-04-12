@@ -17,7 +17,7 @@ import org.junit.runner.RunWith;
         glue = "com/cydeo/step_definitions",
         dryRun = false,
         stepNotifications = true,
-        tags = "@wip",
+        tags = "@smoke",
         publish=true
 )
 
