@@ -57,3 +57,10 @@ Background:
     And User click on three dot button
     And User click on Delete button
     Then Verify that  the contact deleted
+
+  @SYMU10-584
+  Scenario: User can display daily calendar view
+    Given user go on the calender page
+    When user clicks the menu toggle
+    And user clicks the day link
+    Then user should see the daily calender view

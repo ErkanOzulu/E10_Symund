@@ -20,8 +20,6 @@ public class CalendarStepDefs {
         Driver.getDriver().get(ConfigurationReader.getProperty("symund.url"));
         loginPage.login();
         calendarPage.navigateToModule("calendar");
-
-
     }
 
     @When("user clicks the menu toggle")
@@ -63,4 +61,8 @@ public class CalendarStepDefs {
     }
 
 
+    @Given("user go on the calender page")
+    public void userGoOnTheCalenderPage() {
+        calendarPage.navigateToModule("calendar");
+    }
 }
