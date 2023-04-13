@@ -16,7 +16,7 @@ Background:
     And User click create Conversation button
     Then User verify group name "Group23"
 
-"""
+
   @SYMU10-577
   Scenario: User can see the deleted files board
     Given user navigates to "files"
@@ -56,4 +56,11 @@ Background:
     And User click on three dot button
     And User click on Delete button
     Then Verify that  the contact deleted
-"""
+
+  @SYMU10-584
+  Scenario: User can display daily calendar view
+    Given user go on the calender page
+    When user clicks the menu toggle
+    And user clicks the day link
+    Then user should see the daily calender view
+
