@@ -14,7 +14,6 @@ Background:
       | Betul  |
       | Zack   |
     And User click create Conversation button
-
     Then User verify group name "Group23"
 
 
@@ -64,3 +63,4 @@ Background:
     When user clicks the menu toggle
     And user clicks the day link
     Then user should see the daily calender view
+
