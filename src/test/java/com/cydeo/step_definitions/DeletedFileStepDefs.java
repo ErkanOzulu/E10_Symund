@@ -51,6 +51,7 @@ public class DeletedFileStepDefs {
 
     @When("user clicks Deleted files tab")
     public void user_clicks_deleted_files_tab() {
+        js.executeScript("arguments[0].scrollIntoView(true)", deletedFilesPage.deletedFilesTab);
 
         deletedFilesPage.deletedFilesTab.click();
 
