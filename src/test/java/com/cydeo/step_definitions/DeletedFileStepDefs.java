@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.*;
 
 public class DeletedFileStepDefs {
@@ -33,7 +34,7 @@ public class DeletedFileStepDefs {
     List<String> dFoldersBeforeOrder = new ArrayList<>();
     List<String> dFoldersAfterOrder = new ArrayList<>();
 
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 60);
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(60));
 
     JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 
@@ -59,7 +60,7 @@ public class DeletedFileStepDefs {
 
     @Then("verify that user can see deleted files board")
     public void verify_that_user_can_see_deleted_files_board() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
         try {
 

@@ -1,11 +1,11 @@
 package com.cydeo.utilities;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -51,34 +51,35 @@ public class Driver {
 //                    WebDriverManager.chromedriver().setup();
 //                    driverPool.set(new ChromeDriver());
 //                    driverPool.get().manage().window().maximize();
-//                    driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//                    driverPool.get().manage(). timeouts().implicitlyWait(Duration.ofSeconds(10));
 //                    break;
                 case "chrome":
                 ChromeOptions options = new ChromeOptions();
                 Map<String, Object> prefs = new HashMap<>();
                 prefs.put("intl.accept_languages", "en-GB");
                 options.setExperimentalOption("prefs", prefs);
-                WebDriverManager.chromedriver().setup();
+//                WebDriverManager.chromedriver().setup();
                 //WebDriver driver = new ChromeDriver(options);
                 driverPool.set(new ChromeDriver(options));
                 driverPool.get().manage().window().maximize();
-                driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driverPool.get().manage(). timeouts().implicitlyWait(Duration.ofSeconds(10));
+                driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                 break;
 
 
                 case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
+//                    WebDriverManager.firefoxdriver().setup();
                     driverPool.set(new FirefoxDriver());
                     driverPool.get().manage().window().maximize();
-                    driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                    driverPool.get().manage(). timeouts().implicitlyWait(Duration.ofSeconds(10));
                     break;
                 case "chrome_english": //to set your chrome browser language as English during automation with Selenium
-                WebDriverManager.chromedriver().setup();
+//                WebDriverManager.chromedriver().setup();
                 ChromeOptions optionsForEnglish = new ChromeOptions();
                 optionsForEnglish.addArguments("--lang=eng-US");
                 driverPool.set(new ChromeDriver(optionsForEnglish));
                 driverPool.get().manage().window().maximize();
-                driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driverPool.get().manage(). timeouts().implicitlyWait(Duration.ofSeconds(10));
                 break;
 
             }

@@ -12,6 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -19,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 public class SettingsStepDefs extends BasePage {
 BrowserUtils browserUtils=new BrowserUtils();
     SettingsPage settingsPage=new SettingsPage();
-    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+    WebDriverWait wait=new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
     @And("user click to profile icon")
     public void userClickToProfilIcon() {
